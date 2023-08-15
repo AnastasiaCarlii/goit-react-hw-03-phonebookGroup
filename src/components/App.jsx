@@ -22,14 +22,14 @@ class App extends Component {
   };
   formSubmitData = data => {
     const currentName = this.state.contacts.find(
-      item => item.name.toLocaleLowerCase() === data.name.toLocaleLowerCase()
+      item => item.name.toLowerCase() === data.name.toLowerCase()
     );
     if (currentName) {
       return alert(currentName.name + 'is already in contacts');
     }
 
-    data.id = nanoid();
-    this.setState(prev => ({ contacts: [data, ...prev.contacts] }));
+    const contact = { ...data, id: nanoid() };
+    this.setState(prev => ({ contacts: [contact, ...prev.contacts] }));
   };
 
   handleAddContact = newContact => {
