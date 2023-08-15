@@ -20,6 +20,28 @@ class App extends Component {
     ],
     filter: '',
   };
+
+  // adding to and downloading from local storage
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const updateContacts = JSON.parse(contacts);
+
+    if (updateContacts) {
+      this.setState({ contacts: updateContacts });
+    }
+    console.log('App componentDidMount');
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+    console.log('App componentsDidUpdate');
+  }
+
+  //adding to and downloading from local storage
+
   formSubmitData = data => {
     const currentName = this.state.contacts.find(
       item => item.name.toLowerCase() === data.name.toLowerCase()
